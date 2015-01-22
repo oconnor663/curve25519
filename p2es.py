@@ -52,10 +52,10 @@ def compute_l(x1, x2):
     y2 = compute_y(x2)
     if x1 == x2:
         # https://en.wikipedia.org/wiki/Montgomery_curve#Doubling
-        return (3*x1**2 + 2*A*x1 + 1) * modular_inv(2 * y1) % P
+        return (3*x1**2 + 2*A*x1 + 1) * modular_inv(2 * y1, P) % P
     else:
         # https://en.wikipedia.org/wiki/Montgomery_curve#Addition
-        return (y2 - y1) * modular_inv(x2 - x1) % P
+        return (y2 - y1) * modular_inv(x2 - x1, P) % P
 
 
 def group_add(x1, x2):
