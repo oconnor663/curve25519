@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import random
 import sys
 
@@ -79,3 +81,26 @@ def update_key(client_key, server_key):
     # NOTE: I think there is a typo in the spec here.
     new_server_key = server_key - 8*d
     return new_client_key, new_server_key
+
+
+def main():
+    c1, s1, p1 = generate_key()
+    print("c1", c1)
+    print("s1", s1)
+    print("p1", p1)
+    print()
+
+    c2, s2, p2 = generate_key()
+    print("c2", c2)
+    print("s2", s2)
+    print("p2", p2)
+    print()
+
+    # Print these out so that we can see they're equal. (They're not right now,
+    # because something is broken.)
+    print('shared key', compute_shared_key(c1, s1, p2))
+    print('other way ', compute_shared_key(c2, s2, p1))
+
+
+if __name__ == '__main__':
+    main()
