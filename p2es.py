@@ -60,3 +60,22 @@ def compute_l(x1, x2):
 
 def group_add(x1, x2):
     return (compute_l(x1, x2)**2 - A - x1 - x2) % P
+
+
+def compute_shared_key(client_key, server_key, recipient_public):
+    # This is the work the server does, using only what the server knows.
+    Y = scalarmult(server_key, recipient_public)
+    # This is the work the client does, using only what the client knows plus
+    # Y from the server.
+    X = scalarmult(client_key, recipient_public)
+    return group_add(X, Y)
+
+
+def update_key(client_key, server_key):
+    # The client's work. Note again, not a CSPRNG.
+    d = random.randint(-2**220, 2**220)
+    new_client_key = client_key + 8*d
+    # The server's work, after receiving d from the client.
+    # NOTE: I think there is a typo in the spec here.
+    new_server_key = server_key - 8*d
+    return new_client_key, new_server_key
