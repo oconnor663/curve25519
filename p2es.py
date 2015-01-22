@@ -8,7 +8,7 @@ from modular_sqrt import modular_sqrt
 
 
 # curve25519 parameters
-P = 2*255 - 19
+P = 2**255 - 19
 A = 486662
 
 
